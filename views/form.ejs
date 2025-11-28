@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo CRUD App</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <h1>Todo List</h1>
+
+    <form action="/insertData" method="POST" >
+        <input type="hidden" name="updateId" value="<%= task ? task.taskNumber : '' %>">
+
+        <label>Task Number</label>
+        <input type="number" name="taskNumber" required 
+               value="<%= task ? task.taskNumber : '' %>">
+
+        <label>Task Name</label>
+        <input type="text" name="taskName" required
+               value="<%= task ? task.taskName : '' %>">
+
+        <label>Assigned To</label>
+        <input type="text" name="assignedTo" required
+               value="<%= task ? task.assignedTo : '' %>">
+
+        <button type="submit">
+            <%= task ? "Update Task" : "Add Task" %>
+        </button>
+    </form>
+
+    <h2>All Tasks</h2>
+
+    <table >
+        <tr>
+            <th>Task No.</th>
+            <th>Task Name</th>
+            <th>Assigned To</th>
+            <th>Actions</th>
+        </tr>
+
+        <% tasks.forEach(t => { %>
+        <tr>
+            <td><%= t.taskNumber %></td>
+            <td><%= t.taskName %></td>
+            <td><%= t.assignedTo %></td>
+            <td>
+                <a href="/updateData?taskNumber=<%= t.taskNumber %>">Edit</a> |
+                <a href="/deleteData?taskNumber=<%= t.taskNumber %>">Delete</a>
+            </td>
+        </tr>
+        <% }) %>
+
+    </table>
+
+</body>
+</html>

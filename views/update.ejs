@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+</head>
+<body>
+
+    <h1>Update Task</h1>
+
+    <form action="/updateData" method="post">
+        <table>
+
+            <input type="hidden" name="updateId" value="<%= task.taskNumber %>">
+
+            <tr>
+                <td>Task Number:</td>
+                <td>
+                    <input disabled type="number" value="<%= task.taskNumber %>">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Task Name:</td>
+                <td>
+                    <input type="text" name="taskName" value="<%= task.taskName %>" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Assigned To:</td>
+                <td>
+                    <input type="text" name="assignedTo" value="<%= task.assignedTo %>" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update Task"></td>
+            </tr>
+
+        </table>
+    </form>
+
+</body>
+</html>
