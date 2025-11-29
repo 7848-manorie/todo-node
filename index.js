@@ -4,7 +4,7 @@ const port = 9000;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));  // for CSS
+app.use(express.static("public"));  
 
 let tasks = [
     { taskNumber: 1, taskName: "Create project setup", assignedTo: "Jason" },
@@ -56,3 +56,4 @@ app.get("/updateData", (req, res) => {
 });
 
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+
