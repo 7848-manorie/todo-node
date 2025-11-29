@@ -2,36 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todo CRUD App</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Todo list</title>
+ <style>
+    body {
+    font-family: Arial, sans-serif;
+    background: #f3f6fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 750px;
+    margin: auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.subtitle {
+    margin-top: 25px;
+    font-size: 24px;
+}
+
+.card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    color: #444;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.table th {
+    background: #007bff;
+    color: white;
+}
+
+.edit {
+    color: green;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.delete {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.edit:hover, .delete:hover {
+    text-decoration: underline;
+}
+
+ </style>
 </head>
 <body>
 
-    <h1>Todo List</h1>
+<div class="container">
 
-    <form action="/insertData" method="POST" >
-        <input type="hidden" name="updateId" value="<%= task ? task.taskNumber : '' %>">
+    <h1 class="title">Todo List</h1>
 
-        <label>Task Number</label>
-        <input type="number" name="taskNumber" required 
-               value="<%= task ? task.taskNumber : '' %>">
+    <div class="card">
+        <form action="/insertData" method="POST">
+            <input type="hidden" name="updateId" value="<%= task ? task.taskNumber : '' %>">
 
-        <label>Task Name</label>
-        <input type="text" name="taskName" required
-               value="<%= task ? task.taskName : '' %>">
+            <label>Task Number</label>
+            <input type="number" name="taskNumber" required 
+                   value="<%= task ? task.taskNumber : '' %>">
 
-        <label>Assigned To</label>
-        <input type="text" name="assignedTo" required
-               value="<%= task ? task.assignedTo : '' %>">
+            <label>Task Name</label>
+            <input type="text" name="taskName" required
+                   value="<%= task ? task.taskName : '' %>">
 
-        <button type="submit">
-            <%= task ? "Update Task" : "Add Task" %>
-        </button>
-    </form>
+            <label>Assigned To</label>
+            <input type="text" name="assignedTo" required
+                   value="<%= task ? task.assignedTo : '' %>">
 
-    <h2>All Tasks</h2>
+            <button type="submit" class="btn">
+                <%= task ? "Update Task" : "Add Task" %>
+            </button>
+        </form>
+    </div>
 
-    <table >
+    <h2 class="subtitle">All Tasks</h2>
+
+    <table class="table">
         <tr>
             <th>Task No.</th>
             <th>Task Name</th>
@@ -45,13 +148,16 @@
             <td><%= t.taskName %></td>
             <td><%= t.assignedTo %></td>
             <td>
-                <a href="/updateData?taskNumber=<%= t.taskNumber %>">Edit</a> |
-                <a href="/deleteData?taskNumber=<%= t.taskNumber %>">Delete</a>
+                <a class="edit" href="/updateData?taskNumber=<%= t.taskNumber %>">Edit</a>
+                |
+                <a class="delete" href="/deleteData?taskNumber=<%= t.taskNumber %>">Delete</a>
             </td>
         </tr>
         <% }) %>
 
     </table>
+
+</div>
 
 </body>
 </html>
